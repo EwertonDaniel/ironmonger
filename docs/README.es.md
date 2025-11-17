@@ -1,4 +1,4 @@
-# 🔐 Ironmonger
+# Ironmonger
 
 > **Generador de Secrets Criptográficamente Seguro para Aplicaciones**
 
@@ -11,18 +11,18 @@
 
 ---
 
-## ✨ Características
+## Características
 
-- 🔒 **Extremadamente Seguro**: PBKDF2-HMAC-SHA256 (600k iteraciones) + SHA3-512
-- 🎲 **Alta Entropía**: Combina MAC, timestamp, PID, hostname y CSPRNG
-- 🎯 **Personalizable**: Elige el nombre de variable (APP_SECRET, JWT_SECRET, etc.)
-- 📁 **Múltiples Archivos**: Soporte para diferentes archivos .env
-- 🧪 **100% Probado**: 19 pruebas unitarias, cero advertencias
-- ⚡ **Código Limpio**: Arquitectura limpia siguiendo SOLID y DDD
+- **Extremadamente Seguro**: PBKDF2-HMAC-SHA256 (600k iteraciones) + SHA3-512
+- **Alta Entropía**: Combina MAC, timestamp, PID, hostname y CSPRNG
+- **Personalizable**: Elige el nombre de variable (APP_SECRET, JWT_SECRET, etc.)
+- **Múltiples Archivos**: Soporte para diferentes archivos .env
+- **100% Probado**: 19 pruebas unitarias, cero advertencias
+- **Código Limpio**: Arquitectura limpia siguiendo SOLID y DDD
 
 ---
 
-## 🛠️ Instalación
+## Instalación
 
 ### Requisitos
 
@@ -32,14 +32,14 @@
 ### Via Clone
 
 ```bash
-git clone https://github.com/EchoSistema/ironmonger.git
+git clone https://github.com/EwertonDaniel/ironmonger.git
 cd ironmonger
 cargo install --path .
 ```
 
 ---
 
-## 🚀 Uso
+## Uso
 
 ### Generar APP_SECRET (predeterminado)
 
@@ -71,19 +71,19 @@ ironmonger create:secret -n API_KEY -f config/.env.production
 
 ---
 
-## 🔐 Seguridad
+## Seguridad
 
 ### Propiedades de Seguridad
 
-✅ **No determinístico**: Cada ejecución genera un secret único
+**No determinístico**: Cada ejecución genera un secret único
 
-✅ **Resistente a Fuerza Bruta**: PBKDF2 con 600k iteraciones
+**Resistente a Fuerza Bruta**: PBKDF2 con 600k iteraciones
 
-✅ **Alta Entropía**: ~87+ bytes de múltiples fuentes
+**Alta Entropía**: ~87+ bytes de múltiples fuentes
 
-✅ **Algoritmos Modernos**: SHA3-512 (aprobado por NIST)
+**Algoritmos Modernos**: SHA3-512 (aprobado por NIST)
 
-✅ **Salt Único**: Previene ataques de tablas arcoíris
+**Salt Único**: Previene ataques de tablas arcoíris
 
 ### Comparación de Seguridad
 
@@ -93,22 +93,22 @@ ironmonger create:secret -n API_KEY -f config/.env.production
 | Algoritmo | SHA-256 simple | PBKDF2 + SHA3-512 |
 | Iteraciones | 1 | 600.000 |
 | Random bytes | 0 | 32 bytes (CSPRNG) |
-| Salt | ❌ | ✅ (32 bytes) |
+| Salt | | (32 bytes) |
 | Resistencia | Baja | **Extremadamente Alta** |
 
 ---
 
-## 📚 Documentación
+## Documentación
 
 Para documentación técnica completa, consulte:
 
-📖 **[DOCUMENTATION.md](../DOCUMENTATION.md)** - Arquitectura, módulos, ejemplos de código
+**[DOCUMENTATION.md](../DOCUMENTATION.md)** - Arquitectura, módulos, ejemplos de código
 
 **También disponible en:** [Español](DOCUMENTATION.es.md) | [Português](DOCUMENTATION.pt-BR.md)
 
 ---
 
-## 🧪 Pruebas
+## Pruebas
 
 ```bash
 cargo test
@@ -122,7 +122,7 @@ cargo test
 
 ---
 
-## 🤝 Contribuir
+## Contribuir
 
 1. Fork el repositorio
 2. Crea una rama (`git checkout -b feature/nueva-caracteristica`)
@@ -134,15 +134,15 @@ cargo test
 
 ---
 
-## 📄 Licencia
+## Licencia
 
 Licencia MIT - ver [LICENSE](../LICENSE) para detalles.
 
-## 👨‍💻 Autor
+## Autor
 
-**EchoSistema**
-- GitHub: [@EchoSistema](https://github.com/EchoSistema)
+**Ewerton Daniel**
+- GitHub: [@EwertonDaniel](https://github.com/EwertonDaniel)
 
 ---
 
-**Construido con ❤️ en Rust**
+**Construido con Rust**
