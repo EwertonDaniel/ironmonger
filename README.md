@@ -1,4 +1,4 @@
-# 🔐 Ironmonger
+# Ironmonger
 
 > **Cryptographically Secure Secret Generator for Applications**
 
@@ -11,18 +11,18 @@
 
 ---
 
-## ✨ Features
+## Features
 
-- 🔒 **Extremely Secure**: PBKDF2-HMAC-SHA256 (600k iterations) + SHA3-512
-- 🎲 **High Entropy**: Combines MAC, timestamp, PID, hostname and CSPRNG
-- 🎯 **Customizable**: Choose variable name (APP_SECRET, JWT_SECRET, etc.)
-- 📁 **Multiple Files**: Support for different .env files
-- 🧪 **100% Tested**: 19 unit tests, zero warnings
-- ⚡ **Clean Code**: Clean architecture following SOLID and DDD
+- **Extremely Secure**: PBKDF2-HMAC-SHA256 (600k iterations) + SHA3-512
+- **High Entropy**: Combines MAC, timestamp, PID, hostname and CSPRNG
+- **Customizable**: Choose variable name (APP_SECRET, JWT_SECRET, etc.)
+- **Multiple Files**: Support for different .env files
+- **100% Tested**: 19 unit tests, zero warnings
+- **Clean Code**: Clean architecture following SOLID and DDD
 
 ---
 
-## 🏷️ Information
+## Information
 
 - **Version**: 0.1.0
 - **Rust Edition**: 2021
@@ -30,7 +30,7 @@
 
 ---
 
-## 🛠️ Installation
+## Installation
 
 ### Requirements
 
@@ -40,7 +40,7 @@
 ### Via Clone
 
 ```bash
-git clone https://github.com/EchoSistema/ironmonger.git
+git clone https://github.com/EwertonDaniel/ironmonger.git
 cd ironmonger
 cargo install --path .
 ```
@@ -53,7 +53,7 @@ ironmonger --help
 
 ---
 
-## 🚀 Usage
+## Usage
 
 ### Generate APP_SECRET (default)
 
@@ -95,7 +95,7 @@ ironmonger create:secret --help
 
 ---
 
-## 🔧 How It Works
+## How It Works
 
 ### 1. Entropy Collection
 
@@ -145,7 +145,7 @@ Entropy (87+ bytes)
 
 ---
 
-## 📦 Dependencies
+## Dependencies
 
 ### Production
 
@@ -164,19 +164,19 @@ Entropy (87+ bytes)
 
 ---
 
-## 🔐 Security
+## Security
 
 ### Security Properties
 
-✅ **Non-deterministic**: Each execution generates unique secret
+**Non-deterministic**: Each execution generates unique secret
 
-✅ **Brute-Force Resistant**: PBKDF2 with 600k iterations
+**Brute-Force Resistant**: PBKDF2 with 600k iterations
 
-✅ **High Entropy**: ~87+ bytes from multiple sources
+**High Entropy**: ~87+ bytes from multiple sources
 
-✅ **Modern Algorithms**: SHA3-512 (NIST-approved)
+**Modern Algorithms**: SHA3-512 (NIST-approved)
 
-✅ **Unique Salt**: Prevents rainbow table attacks
+**Unique Salt**: Prevents rainbow table attacks
 
 ### Security Comparison
 
@@ -186,7 +186,7 @@ Entropy (87+ bytes)
 | Algorithm | Simple SHA-256 | PBKDF2 + SHA3-512 |
 | Iterations | 1 | 600,000 |
 | Random bytes | 0 | 32 bytes (CSPRNG) |
-| Salt | ❌ | ✅ (32 bytes) |
+| Salt | | (32 bytes) |
 | Resistance | Low | **Extremely High** |
 
 ### Generation Time
@@ -196,11 +196,11 @@ Entropy (87+ bytes)
 
 ---
 
-## 📚 Documentation
+## Documentation
 
 For complete technical documentation, see:
 
-📖 **[DOCUMENTATION.md](DOCUMENTATION.md)** - Architecture, modules, code examples
+**[DOCUMENTATION.md](DOCUMENTATION.md)** - Architecture, modules, code examples
 
 ### Available Topics:
 
@@ -214,7 +214,7 @@ For complete technical documentation, see:
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
 ```
 ┌──────────────────────────────┐
@@ -244,7 +244,7 @@ For complete technical documentation, see:
 
 ---
 
-## 🧪 Tests
+## Tests
 
 ### Run Tests
 
@@ -268,7 +268,7 @@ cargo test test_salt_generation
 
 ---
 
-## 🛤️ Roadmap
+## Roadmap
 
 - [ ] `rotate-secret` command for automatic rotation
 - [ ] `verify-secret` command for validation
@@ -280,7 +280,7 @@ cargo test test_salt_generation
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 Contributions are welcome! Please:
 
@@ -294,30 +294,30 @@ Contributions are welcome! Please:
 
 ### Conventions
 
-- ✅ Code formatted with `cargo fmt`
-- ✅ Zero warnings from `cargo clippy`
-- ✅ Tests for new features
-- ✅ Updated documentation
-- ✅ Semantic commits (feat, fix, docs, refactor, test, chore)
+- Code formatted with `cargo fmt`
+- Zero warnings from `cargo clippy`
+- Tests for new features
+- Updated documentation
+- Semantic commits (feat, fix, docs, refactor, test, chore)
 
 ---
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
-## 👨‍💻 Author
+## Author
 
-**EchoSistema**
+**Ewerton Daniel**
 
-- GitHub: [@EchoSistema](https://github.com/EchoSistema)
-- Repository: [ironmonger](https://github.com/EchoSistema/ironmonger)
+- GitHub: [@EwertonDaniel](https://github.com/EwertonDaniel)
+- Repository: [ironmonger](https://github.com/EwertonDaniel/ironmonger)
 
 ---
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - [OWASP](https://owasp.org/) - Security guidelines
 - [NIST](https://www.nist.gov/) - Cryptographic standards
@@ -325,4 +325,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-**Built with ❤️ in Rust**
+**Built with Rust**

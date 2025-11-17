@@ -247,15 +247,15 @@ O secret é gerado combinando múltiplas fontes de entropia:
 
 ### Propriedades de Segurança
 
-✅ **Não-determinístico**: Cada execução gera secret diferente (graças ao RNG e timestamp)
+**Não-determinístico**: Cada execução gera secret diferente (graças ao RNG e timestamp)
 
-✅ **Resistente a brute-force**: PBKDF2 com 600k iterações torna ataques computacionalmente caros
+**Resistente a brute-force**: PBKDF2 com 600k iterações torna ataques computacionalmente caros
 
-✅ **Alto nível de entropia**: ~87+ bytes de múltiplas fontes
+**Alto nível de entropia**: ~87+ bytes de múltiplas fontes
 
-✅ **Algoritmos modernos**: SHA3-512 (Keccak) aprovado pelo NIST
+**Algoritmos modernos**: SHA3-512 (Keccak) aprovado pelo NIST
 
-✅ **Salt único**: Previne ataques de rainbow table
+**Salt único**: Previne ataques de rainbow table
 
 ### Comparação com Versão Anterior
 
@@ -275,7 +275,7 @@ O secret é gerado combinando múltiplas fontes de entropia:
 ### Instalação
 
 ```bash
-git clone https://github.com/EchoSistema/ironmonger.git
+git clone https://github.com/EwertonDaniel/ironmonger.git
 cd ironmonger
 cargo install --path .
 ```
@@ -555,5 +555,5 @@ MIT License - veja [LICENSE](LICENSE) para detalhes.
 
 ## Autor
 
-**EchoSistema**
-GitHub: [@EchoSistema](https://github.com/EchoSistema)
+**Ewerton Daniel**
+GitHub: [@EwertonDaniel](https://github.com/EwertonDaniel)

@@ -2,10 +2,10 @@
 name = "ironmonger"
 version = "0.1.0"
 edition = "2021"
-authors = ["EchoSistema"]
+authors = ["Ewerton Daniel <ewertondaniel02@gmail.com>"]
 description = "A CLI tool for generating and managing cryptographically secure application secrets"
 license = "MIT"
-repository = "https://github.com/EchoSistema/ironmonger"
+repository = "https://github.com/EwertonDaniel/ironmonger"
 
 [dependencies]
 clap = { version = "4.1", features = ["derive"] }

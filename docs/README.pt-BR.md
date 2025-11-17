@@ -1,4 +1,4 @@
-# 🔐 Ironmonger
+# Ironmonger
 
 > **Gerador de Secrets Criptograficamente Seguro para Aplicações**
 
@@ -9,18 +9,18 @@
 
 ---
 
-## ✨ Características
+## Características
 
-- 🔒 **Extremamente Seguro**: PBKDF2-HMAC-SHA256 (600k iterações) + SHA3-512
-- 🎲 **Alta Entropia**: Combina MAC, timestamp, PID, hostname e CSPRNG
-- 🎯 **Customizável**: Escolha o nome da variável (APP_SECRET, JWT_SECRET, etc.)
-- 📁 **Múltiplos Arquivos**: Suporte para diferentes arquivos .env
-- 🧪 **100% Testado**: 19 testes unitários, zero warnings
-- ⚡ **Clean Code**: Arquitetura limpa seguindo SOLID e DDD
+- **Extremamente Seguro**: PBKDF2-HMAC-SHA256 (600k iterações) + SHA3-512
+- **Alta Entropia**: Combina MAC, timestamp, PID, hostname e CSPRNG
+- **Customizável**: Escolha o nome da variável (APP_SECRET, JWT_SECRET, etc.)
+- **Múltiplos Arquivos**: Suporte para diferentes arquivos .env
+- **100% Testado**: 19 testes unitários, zero warnings
+- **Clean Code**: Arquitetura limpa seguindo SOLID e DDD
 
 ---
 
-## 🏷️ Informações
+## Informações
 
 - **Versão**: 0.1.0
 - **Edição Rust**: 2021
@@ -28,7 +28,7 @@
 
 ---
 
-## 🛠️ Instalação
+## Instalação
 
 ### Requisitos
 
@@ -38,7 +38,7 @@
 ### Via Clone
 
 ```bash
-git clone https://github.com/EchoSistema/ironmonger.git
+git clone https://github.com/EwertonDaniel/ironmonger.git
 cd ironmonger
 cargo install --path .
 ```
@@ -51,7 +51,7 @@ ironmonger --help
 
 ---
 
-## 🚀 Uso
+## Uso
 
 ### Gerar APP_SECRET (padrão)
 
@@ -93,7 +93,7 @@ ironmonger create:secret --help
 
 ---
 
-## 🔧 Como Funciona
+## Como Funciona
 
 ### 1. Coleta de Entropia
 
@@ -143,7 +143,7 @@ Entropia (87+ bytes)
 
 ---
 
-## 📦 Dependências
+## Dependências
 
 ### Produção
 
@@ -162,19 +162,19 @@ Entropia (87+ bytes)
 
 ---
 
-## 🔐 Segurança
+## Segurança
 
 ### Propriedades de Segurança
 
-✅ **Não-determinístico**: Cada execução gera secret único
+**Não-determinístico**: Cada execução gera secret único
 
-✅ **Resistente a Brute-Force**: PBKDF2 com 600k iterações
+**Resistente a Brute-Force**: PBKDF2 com 600k iterações
 
-✅ **Alta Entropia**: ~87+ bytes de múltiplas fontes
+**Alta Entropia**: ~87+ bytes de múltiplas fontes
 
-✅ **Algoritmos Modernos**: SHA3-512 (NIST-approved)
+**Algoritmos Modernos**: SHA3-512 (NIST-approved)
 
-✅ **Salt Único**: Previne rainbow table attacks
+**Salt Único**: Previne rainbow table attacks
 
 ### Comparação de Segurança
 
@@ -184,7 +184,7 @@ Entropia (87+ bytes)
 | Algoritmo | SHA-256 simples | PBKDF2 + SHA3-512 |
 | Iterações | 1 | 600.000 |
 | Random bytes | 0 | 32 bytes (CSPRNG) |
-| Salt | ❌ | ✅ (32 bytes) |
+| Salt | | (32 bytes) |
 | Resistência | Baixa | Alta |
 
 ### Tempo de Geração
@@ -194,11 +194,11 @@ Entropia (87+ bytes)
 
 ---
 
-## 📚 Documentação
+## Documentação
 
 Para documentação técnica completa, consulte:
 
-📖 **[DOCUMENTATION.md](DOCUMENTATION.md)** - Arquitetura, módulos, exemplos de código
+**[DOCUMENTATION.md](DOCUMENTATION.md)** - Arquitetura, módulos, exemplos de código
 
 ### Tópicos Disponíveis:
 
@@ -212,7 +212,7 @@ Para documentação técnica completa, consulte:
 
 ---
 
-## 🏗️ Arquitetura
+## Arquitetura
 
 ```
 ┌──────────────────────────────┐
@@ -242,7 +242,7 @@ Para documentação técnica completa, consulte:
 
 ---
 
-## 🧪 Testes
+## Testes
 
 ### Executar Testes
 
@@ -266,7 +266,7 @@ cargo test test_salt_generation
 
 ---
 
-## 🛤️ Roadmap
+## Roadmap
 
 - [ ] Comando `rotate-secret` para rotação automática
 - [ ] Comando `verify-secret` para validação
@@ -278,7 +278,7 @@ cargo test test_salt_generation
 
 ---
 
-## 🤝 Contribuindo
+## Contribuindo
 
 Contribuições são bem-vindas! Por favor:
 
@@ -292,30 +292,30 @@ Contribuições são bem-vindas! Por favor:
 
 ### Convenções
 
-- ✅ Código formatado com `cargo fmt`
-- ✅ Zero warnings do `cargo clippy`
-- ✅ Testes para novas funcionalidades
-- ✅ Documentação atualizada
-- ✅ Commits semânticos (feat, fix, docs, refactor, test, chore)
+- Código formatado com `cargo fmt`
+- Zero warnings do `cargo clippy`
+- Testes para novas funcionalidades
+- Documentação atualizada
+- Commits semânticos (feat, fix, docs, refactor, test, chore)
 
 ---
 
-## 📄 Licença
+## Licença
 
 Este projeto está licenciado sob a licença MIT - veja o arquivo [LICENSE](LICENSE) para detalhes.
 
 ---
 
-## 👨‍💻 Autor
+## Autor
 
-**EchoSistema**
+**Ewerton Daniel**
 
-- GitHub: [@EchoSistema](https://github.com/EchoSistema)
-- Repository: [ironmonger](https://github.com/EchoSistema/ironmonger)
+- GitHub: [@EwertonDaniel](https://github.com/EwertonDaniel)
+- Repository: [ironmonger](https://github.com/EwertonDaniel/ironmonger)
 
 ---
 
-## 🙏 Agradecimentos
+## Agradecimentos
 
 - [OWASP](https://owasp.org/) - Guidelines de segurança
 - [NIST](https://www.nist.gov/) - Padrões criptográficos
@@ -323,4 +323,4 @@ Este projeto está licenciado sob a licença MIT - veja o arquivo [LICENSE](LICE
 
 ---
 
-**Desenvolvido com ❤️ em Rust**
+**Desenvolvido com Rust**
