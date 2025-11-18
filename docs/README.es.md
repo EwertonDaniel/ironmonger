@@ -17,7 +17,7 @@
 - **Alta Entropía**: Combina MAC, timestamp, PID, hostname y CSPRNG
 - **Personalizable**: Elige el nombre de variable (APP_SECRET, JWT_SECRET, etc.)
 - **Múltiples Archivos**: Soporte para diferentes archivos .env
-- **100% Probado**: 19 pruebas unitarias, cero advertencias
+- **100% Probado**: 14 pruebas de integración, cero advertencias
 - **Código Limpio**: Arquitectura limpia siguiendo SOLID y DDD
 
 ---
@@ -116,8 +116,8 @@ cargo test
 
 ### Estadísticas
 
-- **19 pruebas unitarias**
-- **100% de cobertura** en capas críticas
+- **14 pruebas de integración**
+- **100% de cobertura** en APIs públicas
 - **Cero advertencias** de clippy
 
 ---

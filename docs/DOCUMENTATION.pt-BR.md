@@ -45,6 +45,9 @@ O **Ironmonger** segue os princípios de **Clean Architecture** e **Domain-Drive
 ```
 ironmonger/
 ├── src/
+│   ├── cli/
+│   │   └── mod.rs              # Definições de comandos CLI (clap)
+│   │
 │   ├── domain/
 │   │   ├── mod.rs              # Exporta módulos do domínio
 │   │   ├── errors.rs           # Erros customizados (SecretError)
@@ -56,8 +59,21 @@ ironmonger/
 │   │   └── env_writer.rs       # Persistência em arquivos .env
 │   │
 │   ├── lib.rs                  # Biblioteca pública
-│   └── main.rs                 # CLI entry point
+│   └── main.rs                 # CLI entry point (mínimo)
 │
+├── tests/
+│   ├── domain/
+│   │   ├── mod.rs              # Módulo de testes do domínio
+│   │   └── secret.rs           # Testes de integração do AppSecret
+│   │
+│   ├── infrastructure/
+│   │   ├── mod.rs              # Módulo de testes da infraestrutura
+│   │   ├── secret_generator.rs # Testes de integração do SecretGenerator
+│   │   └── env_writer.rs       # Testes de integração do EnvFileWriter
+│   │
+│   └── integration_tests.rs    # Ponto de entrada dos testes de integração
+│
+├── docs/                       # Documentação em outros idiomas
 ├── Cargo.toml                  # Dependências e metadados
 ├── README.md                   # Documentação de uso
 └── DOCUMENTATION.md            # Este arquivo
@@ -194,9 +210,17 @@ pub const SECRET_KEY_NAME: &str = "APP_SECRET";
 
 ---
 
-### 3. **Application Layer** (`src/main.rs`)
+### 3. **Application Layer**
 
-Entry point da CLI usando `clap`.
+#### `src/cli/mod.rs`
+
+Define comandos e argumentos da CLI usando `clap`.
+
+**Métodos públicos:**
+
+| Método | Descrição | Retorno |
+|--------|-----------|---------|
+| `build_cli()` | Constrói a estrutura da aplicação CLI | `Command` |
 
 **Comando disponível:**
 ```bash
@@ -207,13 +231,18 @@ ironmonger create:secret [OPTIONS]
 - `-n, --name <KEY_NAME>`: Nome da variável (padrão: APP_SECRET)
 - `-f, --file <FILE_PATH>`: Caminho do arquivo (padrão: .env)
 
+#### `src/main.rs`
+
+Ponto de entrada CLI mínimo que orquestra o fluxo da aplicação.
+
 **Fluxo de execução:**
-1. Parse dos argumentos CLI
-2. Cria instância de `SecretGenerator`
-3. Gera novo secret
-4. Cria instância de `EnvFileWriter`
-5. Persiste secret no arquivo
-6. Exibe confirmação ao usuário
+1. Constrói CLI com `build_cli()`
+2. Parse dos argumentos de linha de comando
+3. Cria instância de `SecretGenerator`
+4. Gera novo secret
+5. Cria instância de `EnvFileWriter`
+6. Persiste secret no arquivo
+7. Exibe confirmação ao usuário
 
 ---
 
@@ -507,9 +536,16 @@ cargo test test_generate_uniqueness
 
 ### Cobertura de Testes
 
-- **Domain Layer**: 100% (6/6 testes)
-- **Infrastructure Layer**: 100% (13/13 testes)
-- **Total**: 19 testes unitários
+Todos os testes foram movidos para o diretório `tests/` seguindo as boas práticas do Rust:
+
+- **Domain Layer** (`tests/domain/`): 6 testes de integração
+  - `secret.rs`: Testes de validação e métodos do AppSecret
+
+- **Infrastructure Layer** (`tests/infrastructure/`): 8 testes de integração
+  - `secret_generator.rs`: Testes de geração e unicidade de secrets
+  - `env_writer.rs`: Testes de persistência em arquivos .env
+
+- **Total**: 14 testes de integração (100% de cobertura das APIs públicas)
 
 ---
 

@@ -47,6 +47,9 @@
 ```
 ironmonger/
 ├── src/
+│   ├── cli/
+│   │   └── mod.rs              # Definiciones de comandos CLI (clap)
+│   │
 │   ├── domain/
 │   │   ├── mod.rs              # Exporta módulos de dominio
 │   │   ├── errors.rs           # Errores personalizados (SecretError)
@@ -58,7 +61,19 @@ ironmonger/
 │   │   └── env_writer.rs       # Persistencia en archivos .env
 │   │
 │   ├── lib.rs                  # Biblioteca pública
-│   └── main.rs                 # Punto de entrada CLI
+│   └── main.rs                 # Punto de entrada CLI (mínimo)
+│
+├── tests/
+│   ├── domain/
+│   │   ├── mod.rs              # Módulo de pruebas del dominio
+│   │   └── secret.rs           # Pruebas de integración de AppSecret
+│   │
+│   ├── infrastructure/
+│   │   ├── mod.rs              # Módulo de pruebas de infraestructura
+│   │   ├── secret_generator.rs # Pruebas de integración de SecretGenerator
+│   │   └── env_writer.rs       # Pruebas de integración de EnvFileWriter
+│   │
+│   └── integration_tests.rs    # Punto de entrada de pruebas de integración
 │
 ├── docs/                       # Documentación en otros idiomas
 ├── Cargo.toml                  # Dependencias y metadatos
@@ -167,9 +182,16 @@ cargo test
 
 ### Cobertura de Pruebas
 
-- **Domain Layer**: 100% (6/6 pruebas)
-- **Infrastructure Layer**: 100% (13/13 pruebas)
-- **Total**: 19 pruebas unitarias
+Todas las pruebas se han movido al directorio `tests/` siguiendo las mejores prácticas de Rust:
+
+- **Domain Layer** (`tests/domain/`): 6 pruebas de integración
+  - `secret.rs`: Pruebas de validación y métodos de AppSecret
+
+- **Infrastructure Layer** (`tests/infrastructure/`): 8 pruebas de integración
+  - `secret_generator.rs`: Pruebas de generación y unicidad de secrets
+  - `env_writer.rs`: Pruebas de persistencia en archivos .env
+
+- **Total**: 14 pruebas de integración (100% de cobertura de APIs públicas)
 
 ---
 

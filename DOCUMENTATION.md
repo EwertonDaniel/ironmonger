@@ -47,6 +47,9 @@
 ```
 ironmonger/
 ├── src/
+│   ├── cli/
+│   │   └── mod.rs              # CLI command definitions (clap)
+│   │
 │   ├── domain/
 │   │   ├── mod.rs              # Exports domain modules
 │   │   ├── errors.rs           # Custom errors (SecretError)
@@ -58,7 +61,19 @@ ironmonger/
 │   │   └── env_writer.rs       # .env file persistence
 │   │
 │   ├── lib.rs                  # Public library
-│   └── main.rs                 # CLI entry point
+│   └── main.rs                 # CLI entry point (minimal)
+│
+├── tests/
+│   ├── domain/
+│   │   ├── mod.rs              # Domain tests module
+│   │   └── secret.rs           # AppSecret integration tests
+│   │
+│   ├── infrastructure/
+│   │   ├── mod.rs              # Infrastructure tests module
+│   │   ├── secret_generator.rs # SecretGenerator integration tests
+│   │   └── env_writer.rs       # EnvFileWriter integration tests
+│   │
+│   └── integration_tests.rs    # Main integration tests entry point
 │
 ├── docs/                       # Documentation in other languages
 ├── Cargo.toml                  # Dependencies and metadata
@@ -197,9 +212,17 @@ pub const SECRET_KEY_NAME: &str = "APP_SECRET";
 
 ---
 
-### 3. **Application Layer** (`src/main.rs`)
+### 3. **Application Layer**
 
-CLI entry point using `clap`.
+#### `src/cli/mod.rs`
+
+Defines CLI commands and arguments using `clap`.
+
+**Public methods:**
+
+| Method | Description | Returns |
+|--------|-------------|---------|
+| `build_cli()` | Builds the CLI app structure | `Command` |
 
 **Available command:**
 ```bash
@@ -210,13 +233,18 @@ ironmonger create:secret [OPTIONS]
 - `-n, --name <KEY_NAME>`: Variable name (default: APP_SECRET)
 - `-f, --file <FILE_PATH>`: File path (default: .env)
 
+#### `src/main.rs`
+
+Minimal CLI entry point that orchestrates the application flow.
+
 **Execution flow:**
-1. Parse CLI arguments
-2. Create `SecretGenerator` instance
-3. Generate new secret
-4. Create `EnvFileWriter` instance
-5. Persist secret to file
-6. Display confirmation to user
+1. Build CLI with `build_cli()`
+2. Parse command-line arguments
+3. Create `SecretGenerator` instance
+4. Generate new secret
+5. Create `EnvFileWriter` instance
+6. Persist secret to file
+7. Display confirmation to user
 
 ---
 
@@ -450,9 +478,16 @@ cargo test test_generate_uniqueness
 
 ### Test Coverage
 
-- **Domain Layer**: 100% (6/6 tests)
-- **Infrastructure Layer**: 100% (13/13 tests)
-- **Total**: 19 unit tests
+All tests have been moved to the `tests/` directory following Rust best practices:
+
+- **Domain Layer** (`tests/domain/`): 6 integration tests
+  - `secret.rs`: Tests for AppSecret validation and methods
+
+- **Infrastructure Layer** (`tests/infrastructure/`): 8 integration tests
+  - `secret_generator.rs`: Tests for secret generation and uniqueness
+  - `env_writer.rs`: Tests for .env file persistence
+
+- **Total**: 14 integration tests (100% coverage on public APIs)
 
 ---
 

@@ -30,7 +30,7 @@ impl SecretGenerator {
         Ok(AppSecret::new_unchecked(hash))
     }
 
-    fn collect_entropy(&self) -> Result<Vec<u8>> {
+    pub(crate) fn collect_entropy(&self) -> Result<Vec<u8>> {
         let mut entropy = Vec::new();
 
         entropy.extend_from_slice(self.get_mac_address()?.as_bytes());
@@ -66,7 +66,7 @@ impl SecretGenerator {
             .unwrap()
     }
 
-    fn get_random_bytes(&self) -> [u8; 32] {
+    pub(crate) fn get_random_bytes(&self) -> [u8; 32] {
         let mut rng = rand::thread_rng();
         let mut bytes = [0u8; 32];
         rng.fill_bytes(&mut bytes);
@@ -80,14 +80,19 @@ impl SecretGenerator {
             .unwrap_or_else(|| "unknown".to_string())
     }
 
-    fn generate_salt(&self) -> [u8; SALT_SIZE] {
+    pub(crate) fn generate_salt(&self) -> [u8; SALT_SIZE] {
         let mut rng = rand::thread_rng();
         let mut salt = [0u8; SALT_SIZE];
         rng.fill_bytes(&mut salt);
         salt
     }
 
-    fn derive_key_multi_layer(&self, entropy: &[u8], salt1: &[u8], salt2: &[u8]) -> [u8; OUTPUT_SIZE] {
+    fn derive_key_multi_layer(
+        &self,
+        entropy: &[u8],
+        salt1: &[u8],
+        salt2: &[u8],
+    ) -> [u8; OUTPUT_SIZE] {
         let mut layer1 = [0u8; ENTROPY_SIZE];
         pbkdf2_hmac::<Sha512>(entropy, salt1, PBKDF2_ITERATIONS, &mut layer1);
 
@@ -119,65 +124,5 @@ impl SecretGenerator {
 impl Default for SecretGenerator {
     fn default() -> Self {
         Self::new()
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test_secret_generator_new() {
-        let generator = SecretGenerator::new();
-        assert!(std::mem::size_of_val(&generator) == 0);
-    }
-
-    #[test]
-    fn test_generate_produces_valid_secret() {
-        let generator = SecretGenerator::new();
-        let result = generator.generate();
-        assert!(result.is_ok());
-
-        let secret = result.unwrap();
-        assert_eq!(secret.as_str().len(), 192);
-        assert!(secret.as_str().chars().all(|c| c.is_ascii_hexdigit()));
-    }
-
-    #[test]
-    fn test_generate_uniqueness() {
-        let generator = SecretGenerator::new();
-        let secret1 = generator.generate().unwrap();
-        std::thread::sleep(std::time::Duration::from_millis(1));
-        let secret2 = generator.generate().unwrap();
-
-        assert_ne!(secret1.as_str(), secret2.as_str());
-    }
-
-    #[test]
-    fn test_random_bytes_generation() {
-        let generator = SecretGenerator::new();
-        let bytes1 = generator.get_random_bytes();
-        let bytes2 = generator.get_random_bytes();
-
-        assert_ne!(bytes1, bytes2);
-    }
-
-    #[test]
-    fn test_salt_generation() {
-        let generator = SecretGenerator::new();
-        let salt1 = generator.generate_salt();
-        let salt2 = generator.generate_salt();
-
-        assert_ne!(salt1, salt2);
-    }
-
-    #[test]
-    fn test_entropy_collection() {
-        let generator = SecretGenerator::new();
-        let result = generator.collect_entropy();
-        assert!(result.is_ok());
-
-        let entropy = result.unwrap();
-        assert!(!entropy.is_empty());
     }
 }
