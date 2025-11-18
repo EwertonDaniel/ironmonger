@@ -2,7 +2,7 @@
 name = "ironmonger"
 version = "0.1.0"
 edition = "2021"
-authors = ["Ewerton Daniel <ewertondaniel02@gmail.com>"]
+authors = ["Ewerton Daniel <contact@ewertondaniel.work>"]
 description = "A CLI tool for generating and managing cryptographically secure application secrets"
 license = "MIT"
 repository = "https://github.com/EwertonDaniel/ironmonger"

@@ -17,7 +17,7 @@
 - **High Entropy**: Combines MAC, timestamp, PID, hostname and CSPRNG
 - **Customizable**: Choose variable name (APP_SECRET, JWT_SECRET, etc.)
 - **Multiple Files**: Support for different .env files
-- **100% Tested**: 19 unit tests, zero warnings
+- **100% Tested**: 14 integration tests, zero warnings
 - **Clean Code**: Clean architecture following SOLID and DDD
 
 ---
@@ -219,7 +219,7 @@ For complete technical documentation, see:
 ```
 ┌──────────────────────────────┐
 │     Application (CLI)        │
-│         main.rs              │
+│    main.rs + cli/mod.rs      │
 └──────────┬───────────────────┘
            │
 ┌──────────▼───────────────────┐
@@ -254,8 +254,8 @@ cargo test
 
 ### Statistics
 
-- **19 unit tests**
-- **100% coverage** on critical layers
+- **14 integration tests**
+- **100% coverage** on public APIs
 - **Zero warnings** from clippy
 - **Formatted** with cargo fmt
 

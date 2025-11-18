@@ -11,6 +11,16 @@ pub struct EnvFileWriter {
 }
 
 impl EnvFileWriter {
+    pub fn env_path(&self) -> &PathBuf {
+        &self.env_path
+    }
+
+    pub fn key_name(&self) -> &str {
+        &self.key_name
+    }
+}
+
+impl EnvFileWriter {
     pub fn new(path: &Path, key_name: &str) -> Self {
         Self {
             env_path: path.to_path_buf(),
@@ -50,7 +60,11 @@ impl EnvFileWriter {
             .map_err(SecretError::from)
     }
 
-    fn update_secret_in_lines(&self, mut lines: Vec<String>, secret: &AppSecret) -> Vec<String> {
+    pub(crate) fn update_secret_in_lines(
+        &self,
+        mut lines: Vec<String>,
+        secret: &AppSecret,
+    ) -> Vec<String> {
         let secret_line = format!("{}={}", self.key_name, secret.as_str());
         let key_prefix = format!("{}=", self.key_name);
         let mut found = false;
@@ -87,107 +101,5 @@ impl EnvFileWriter {
 impl Default for EnvFileWriter {
     fn default() -> Self {
         Self::with_default_path()
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-    use std::fs;
-    use tempfile::TempDir;
-
-    fn create_test_secret() -> AppSecret {
-        AppSecret::new("a".repeat(192)).unwrap()
-    }
-
-    #[test]
-    fn test_new_env_writer() {
-        let writer = EnvFileWriter::new(Path::new(".env"), "TEST_SECRET");
-        assert_eq!(writer.env_path, PathBuf::from(".env"));
-        assert_eq!(writer.key_name, "TEST_SECRET");
-    }
-
-    #[test]
-    fn test_default_env_writer() {
-        let writer = EnvFileWriter::default();
-        assert_eq!(writer.env_path, PathBuf::from(ENV_FILE_PATH));
-    }
-
-    #[test]
-    fn test_update_secret_in_lines_new_entry() {
-        let writer = EnvFileWriter::default();
-        let secret = create_test_secret();
-        let lines = vec!["OTHER_VAR=value".to_string()];
-
-        let updated = writer.update_secret_in_lines(lines, &secret);
-
-        assert_eq!(updated.len(), 3);
-        assert_eq!(updated[0], "OTHER_VAR=value");
-        assert_eq!(updated[1], "");
-        assert!(updated[2].starts_with("APP_SECRET="));
-    }
-
-    #[test]
-    fn test_update_secret_in_lines_replace_existing() {
-        let writer = EnvFileWriter::default();
-        let secret = create_test_secret();
-        let lines = vec![
-            "OTHER_VAR=value".to_string(),
-            "APP_SECRET=old_secret".to_string(),
-        ];
-
-        let updated = writer.update_secret_in_lines(lines, &secret);
-
-        assert_eq!(updated.len(), 2);
-        assert_eq!(updated[0], "OTHER_VAR=value");
-        assert!(updated[1].starts_with("APP_SECRET="));
-        assert!(updated[1].contains(&"a".repeat(64)));
-    }
-
-    #[test]
-    fn test_write_to_new_file() {
-        let temp_dir = TempDir::new().unwrap();
-        let env_path = temp_dir.path().join(".env");
-        let writer = EnvFileWriter::new(&env_path, "APP_SECRET");
-        let secret = create_test_secret();
-
-        let result = writer.write(&secret);
-        assert!(result.is_ok());
-        assert!(env_path.exists());
-
-        let content = fs::read_to_string(&env_path).unwrap();
-        assert!(content.contains("APP_SECRET="));
-        assert!(content.contains(&"a".repeat(64)));
-    }
-
-    #[test]
-    fn test_write_updates_existing_secret() {
-        let temp_dir = TempDir::new().unwrap();
-        let env_path = temp_dir.path().join(".env");
-
-        fs::write(&env_path, "APP_SECRET=old_value\n").unwrap();
-
-        let writer = EnvFileWriter::new(&env_path, "APP_SECRET");
-        let secret = create_test_secret();
-
-        writer.write(&secret).unwrap();
-
-        let content = fs::read_to_string(&env_path).unwrap();
-        assert!(content.contains(&"a".repeat(64)));
-        assert!(!content.contains("old_value"));
-    }
-
-    #[test]
-    fn test_custom_key_name() {
-        let temp_dir = TempDir::new().unwrap();
-        let env_path = temp_dir.path().join(".env");
-        let writer = EnvFileWriter::new(&env_path, "JWT_SECRET");
-        let secret = create_test_secret();
-
-        writer.write(&secret).unwrap();
-
-        let content = fs::read_to_string(&env_path).unwrap();
-        assert!(content.contains("JWT_SECRET="));
-        assert!(!content.contains("APP_SECRET="));
     }
 }
